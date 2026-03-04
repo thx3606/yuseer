@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 import { User, UserRole, Gender } from '@prisma/client';
 import prisma from '../config/database';
 import { logger, logAuthAttempt } from '../utils/logger';
+import { generateTenantStudentCode } from '../utils/generators';
 
 interface RegisterDTO {
   email: string;
@@ -342,8 +343,12 @@ export class AuthService {
         break;
 
       case UserRole.STUDENT:
+        // Get user to know his tenantId
+        const studentUser = await prisma.user.findUnique({ where: { id: userId } });
+        const tId = studentUser?.tenantId;
         // إنشاء رقم طالب فريد
-        const studentCode = await this.generateUniqueStudentCode();
+        const studentCode = await generateTenantStudentCode(tId || 'dummy');
+
         await prisma.student.create({
           data: {
             userId,
@@ -375,15 +380,6 @@ export class AuthService {
       default:
         break;
     }
-  }
-
-  /**
-   * إنشاء رقم طالب فريد
-   */
-  private static async generateUniqueStudentCode(): Promise<string> {
-    const count = await prisma.student.count();
-    const code = `S${String(1000001 + count)}`;
-    return code;
   }
 }
 

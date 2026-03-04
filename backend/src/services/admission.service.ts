@@ -9,6 +9,7 @@ import { UserRole, StudentStatus, AdmissionStatus } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import prisma from '../config/database';
 import { logger } from '../utils/logger';
+import { generateTenantStudentCode } from '../utils/generators';
 
 interface PublicEnrollmentDTO {
     tenantId: string;
@@ -83,9 +84,7 @@ export class AdmissionService {
                 });
 
                 // إنشاء رقم طالبي فريد
-                const dateStr = new Date().getFullYear().toString().substring(2);
-                const randomNum = Math.floor(1000 + Math.random() * 9000).toString();
-                const studentCode = `STU${dateStr}${randomNum}`;
+                const studentCode = await generateTenantStudentCode(data.tenantId, tx);
 
                 // إنشاء سجل الطالب في الانتظار
                 const student = await tx.student.create({

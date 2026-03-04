@@ -30,6 +30,7 @@ import authRoutes from './routes/auth.routes';
 import tenantRoutes from './routes/tenant.routes';
 import paymentRoutes from './routes/payment.routes';
 import admissionRoutes from './routes/admission.routes';
+import teacherRoutes from './routes/teacher.routes';
 // import userRoutes from './routes/user.routes';
 // ... المزيد من المسارات
 
@@ -166,7 +167,7 @@ app.use(`/api/${API_VERSION}/admissions`, admissionRoutes);
 // المسارات (سيتم إضافتها تدريجياً)
 // app.use(`/api/${API_VERSION}/users`, userRoutes);
 // app.use(`/api/${API_VERSION}/students`, studentRoutes);
-// app.use(`/api/${API_VERSION}/teachers`, teacherRoutes);
+app.use(`/api/${API_VERSION}/teachers`, teacherRoutes);
 // app.use(`/api/${API_VERSION}/classes`, classRoutes);
 // app.use(`/api/${API_VERSION}/evaluations`, evaluationRoutes);
 // app.use(`/api/${API_VERSION}/exams`, examRoutes);

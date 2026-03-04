@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[27553,["/_next/static/chunks/c1e8b0911a1ff014.js","/_next/static/chunks/003d11fc5b2b83df.js"],"ClientPageRoot"]
-3:I[35738,["/_next/static/chunks/64175c27e238db68.js","/_next/static/chunks/1cf5b36bebfc70ed.js","/_next/static/chunks/122badb7368a9fd9.js","/_next/static/chunks/837c0b9a6647f9be.js","/_next/static/chunks/885d3d824f0b80d5.js"],"default"]
-6:I[97559,["/_next/static/chunks/c1e8b0911a1ff014.js","/_next/static/chunks/003d11fc5b2b83df.js"],"OutletBoundary"]
+2:I[27553,["/_next/static/chunks/c1e8b0911a1ff014.js","/_next/static/chunks/94fdd209d09c60f3.js"],"ClientPageRoot"]
+3:I[35738,["/_next/static/chunks/b1c30c32248660e3.js","/_next/static/chunks/1cf5b36bebfc70ed.js","/_next/static/chunks/5b6c8f21b3c3a2f9.js","/_next/static/chunks/e0117dac5c614c10.js","/_next/static/chunks/4ccdb5de485c66a7.js"],"default"]
+6:I[97559,["/_next/static/chunks/c1e8b0911a1ff014.js","/_next/static/chunks/94fdd209d09c60f3.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"buildId":"F25yB5q7_QdsosDlpTngI","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/837c0b9a6647f9be.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/885d3d824f0b80d5.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"CMEJPQGoDhR9NoisoG5UQ","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/e0117dac5c614c10.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/4ccdb5de485c66a7.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
