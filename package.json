@@ -6,7 +6,8 @@
   "workspaces": [
     "backend",
     "frontend",
-    "shared"
+    "shared",
+    "web-app"
   ],
   "scripts": {
     "install:all": "npm install && npm run install:backend && npm run install:frontend",

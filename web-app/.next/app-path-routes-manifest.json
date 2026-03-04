@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/dashboard/admissions/page": "/dashboard/admissions",
+  "/dashboard/classes/page": "/dashboard/classes",
+  "/dashboard/evaluation/page": "/dashboard/evaluation",
+  "/dashboard/exams/page": "/dashboard/exams",
+  "/dashboard/messages/page": "/dashboard/messages",
+  "/dashboard/page": "/dashboard",
+  "/dashboard/settings/page": "/dashboard/settings",
+  "/dashboard/students/[id]/page": "/dashboard/students/[id]",
+  "/dashboard/students/new/page": "/dashboard/students/new",
+  "/dashboard/students/page": "/dashboard/students",
+  "/dashboard/teachers/page": "/dashboard/teachers",
+  "/login/page": "/login",
+  "/page": "/",
+  "/register/page": "/register",
+  "/status/page": "/status"
+}

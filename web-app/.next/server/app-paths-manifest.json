@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/dashboard/admissions/page": "app/dashboard/admissions/page.js",
+  "/dashboard/classes/page": "app/dashboard/classes/page.js",
+  "/dashboard/evaluation/page": "app/dashboard/evaluation/page.js",
+  "/dashboard/exams/page": "app/dashboard/exams/page.js",
+  "/dashboard/messages/page": "app/dashboard/messages/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/settings/page": "app/dashboard/settings/page.js",
+  "/dashboard/students/[id]/page": "app/dashboard/students/[id]/page.js",
+  "/dashboard/students/new/page": "app/dashboard/students/new/page.js",
+  "/dashboard/students/page": "app/dashboard/students/page.js",
+  "/dashboard/teachers/page": "app/dashboard/teachers/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/register/page": "app/register/page.js",
+  "/status/page": "app/status/page.js"
+}
