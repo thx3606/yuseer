@@ -1,6 +1,9 @@
 {
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
+  "/admin/onboarding/page": "/admin/onboarding",
+  "/admin/page": "/admin",
+  "/admin/tenants/page": "/admin/tenants",
   "/dashboard/admissions/page": "/dashboard/admissions",
   "/dashboard/classes/new/page": "/dashboard/classes/new",
   "/dashboard/classes/page": "/dashboard/classes",

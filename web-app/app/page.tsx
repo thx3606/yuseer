@@ -52,7 +52,7 @@ export default function HomePage() {
                     className="flex flex-col sm:flex-row gap-6 justify-center w-full max-w-md mx-auto"
                 >
                     <Link
-                        href="/dashboard"
+                        href="/login"
                         className="group relative px-8 py-4 bg-emerald-600/90 hover:bg-emerald-500 backdrop-blur-md rounded-2xl font-bold text-white text-lg transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] border border-emerald-400/30 overflow-hidden flex-1"
                     >
                         <span className="relative z-10 flex items-center justify-center gap-2">

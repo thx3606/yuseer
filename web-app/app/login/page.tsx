@@ -1,12 +1,48 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail, Phone, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function LoginPage() {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            // Attempt Platform Owner Login
+            const res = await axios.post('/api/v1/platform/auth/login', { email, password });
+
+            if (res.data.success) {
+                // Store token (Normally in secure cookies, but for this SaaS MVP using localStorage)
+                localStorage.setItem('yuoser_token', res.data.data.token);
+                localStorage.setItem('yuoser_user', JSON.stringify(res.data.data.user));
+
+                // Redirect user based on their role
+                if (res.data.data.user.role === 'Super Admin') {
+                    router.push('/admin');
+                } else {
+                    router.push('/dashboard');
+                }
+            }
+        } catch (err: any) {
+            console.error('Login Error:', err);
+            setError(err.response?.data?.message || 'بيانات الدخول غير صحيحة');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-[#0a192f] flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -31,17 +67,26 @@ export default function LoginPage() {
                         <p className="text-slate-400 mt-2 text-sm">أهلاً بك مجدداً في نظام يسر للإدارة</p>
                     </div>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={handleLogin}>
+                        {error && (
+                            <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/50 text-rose-400 text-sm font-bold text-center">
+                                {error}
+                            </div>
+                        )}
+
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-slate-300">البريد الإلكتروني / رقم الجوال</label>
+                            <label className="text-sm font-medium text-slate-300">البريد الإلكتروني</label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <Mail className="h-5 w-5 text-emerald-500/50" />
                                 </div>
                                 <input
-                                    type="text"
+                                    type="email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="w-full bg-[#0a192f] border border-slate-700 rounded-xl py-3 px-10 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                                    placeholder="admin@yuoser.com"
+                                    placeholder="أدخل بريدك الإلكتروني"
                                     dir="ltr"
                                 />
                             </div>
@@ -58,6 +103,9 @@ export default function LoginPage() {
                                 </div>
                                 <input
                                     type={showPassword ? "text" : "password"}
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="w-full bg-[#0a192f] border border-slate-700 rounded-xl py-3 px-10 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                                     placeholder="••••••••"
                                     dir="ltr"
@@ -73,11 +121,11 @@ export default function LoginPage() {
                         </div>
 
                         <button
-                            type="button"
-                            onClick={() => window.location.href = '/dashboard'}
-                            className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transform hover:-translate-y-0.5"
+                            type="submit"
+                            disabled={loading}
+                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
                         >
-                            تسجيل الدخول الأن
+                            {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : 'تسجيل الدخول الأن'}
                         </button>
                     </form>
 

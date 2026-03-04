@@ -68,8 +68,11 @@ model Tenant {
   logo               String?
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
+  customLimits       Json?
 
   users                User[]
+  tickets              SupportTicket[]
+  payments             Payment[]
   shifts               Shift[]
   schools              School[]
   classes              Class[]
@@ -740,4 +743,130 @@ model SystemSettings {
   @@unique([tenantId, key])
   @@index([key])
   @@index([tenantId])
+}
+
+// -------------------------------------------------------------------------------- //
+// Platform Owner (Super Admin) Models
+// -------------------------------------------------------------------------------- //
+model PlatformUser {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  name        String
+  password    String // Hashed
+  roleId      String
+  isActive    Boolean  @default(true)
+  twoFaSecret String?
+  createdAt   DateTime @default(now())
+
+  role             PlatformRole        @relation(fields: [roleId], references: [id])
+  ticketsAssigned  SupportTicket[]
+  handledApprovals OnboardingRequest[]
+  auditLogs        PlatformAuditLog[]
+}
+
+model PlatformRole {
+  id          String         @id @default(uuid())
+  name        String // e.g "Super Admin", "Support Agent", "Billing Manager"
+  permissions Json // ["view_tenants", "manage_billing", "edit_plans"]
+  users       PlatformUser[]
+}
+
+model OnboardingRequest {
+  id            String  @id @default(uuid())
+  orgName       String
+  subdomain     String  @unique
+  adminName     String
+  adminEmail    String
+  contactPhone  String
+  licenseFile   String? // رابط وثيقة التصريح
+  planId        String?
+  status        String  @default("PENDING") // PENDING, APPROVED, REJECTED, NEED_INFO
+  paymentStatus String  @default("UNPAID") // UNPAID, PAID
+  moyasarId     String?
+  notes         String?
+
+  handledById String?
+  handledBy   PlatformUser? @relation(fields: [handledById], references: [id])
+  createdAt   DateTime      @default(now())
+}
+
+model Plan {
+  id            String   @id @default(uuid())
+  name          String
+  monthlyPrice  Float
+  yearlyPrice   Float
+  version       Int      @default(1)
+  limits        Json // { maxStudents: 500, maxStorageGb: 50, hasAPI: true }
+  isActive      Boolean  @default(true)
+  effectiveDate DateTime @default(now())
+}
+
+model Coupon {
+  id                String    @id @default(uuid())
+  code              String    @unique
+  discountType      String // PERCENTAGE, FIXED_AMOUNT
+  discountValue     Float
+  maxUses           Int?
+  usedCount         Int       @default(0)
+  minAmount         Float?
+  validForNewOnly   Boolean   @default(false)
+  applicablePlanIds String[] // Array of plan IDs allowed
+  expiresAt         DateTime?
+  isActive          Boolean   @default(true)
+
+  payments Payment[]
+}
+
+model Payment {
+  id         String   @id @default(uuid())
+  tenantId   String? // nullable for initial onboarding payments
+  amount     Float
+  currency   String   @default("SAR")
+  status     String // PAID, FAILED, REFUNDED
+  gatewayId  String? // Moyasar Transaction ID
+  couponId   String?
+  invoiceUrl String?
+  createdAt  DateTime @default(now())
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
+  coupon Coupon? @relation(fields: [couponId], references: [id])
+}
+
+model SupportTicket {
+  id           String  @id @default(uuid())
+  tenantId     String
+  subject      String
+  status       String  @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, CLOSED
+  priority     String  @default("MEDIUM") // LOW, MEDIUM, HIGH, URGENT
+  assignedToId String?
+
+  tenant     Tenant          @relation(fields: [tenantId], references: [id])
+  assignedTo PlatformUser?   @relation(fields: [assignedToId], references: [id])
+  messages   TicketMessage[]
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+model TicketMessage {
+  id          String   @id @default(uuid())
+  ticketId    String
+  senderType  String // TENANT_USER, PLATFORM_STAFF
+  senderId    String
+  content     String
+  attachments String[]
+  createdAt   DateTime @default(now())
+
+  ticket SupportTicket @relation(fields: [ticketId], references: [id])
+}
+
+model PlatformAuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    String // e.g "REFUND_PAYMENT", "SUSPEND_TENANT"
+  targetId  String // ID of the affected record
+  details   Json
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  user PlatformUser @relation(fields: [userId], references: [id])
 }

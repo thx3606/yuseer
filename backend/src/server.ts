@@ -31,7 +31,7 @@ import tenantRoutes from './routes/tenant.routes';
 import paymentRoutes from './routes/payment.routes';
 import admissionRoutes from './routes/admission.routes';
 import teacherRoutes from './routes/teacher.routes';
-// import userRoutes from './routes/user.routes';
+import platformRoutes from './routes/platform.routes';
 // ... المزيد من المسارات
 
 // تحميل متغيرات البيئة
@@ -158,6 +158,9 @@ app.use(`/api/${API_VERSION}/demo`, demoRoutes);
 
 // مسارات المصادقة
 app.use(`/api/${API_VERSION}/auth`, authRoutes);
+
+// مسارات الإدارة العليا لمالك المنصة (Super Admin)
+app.use(`/api/${API_VERSION}/platform`, platformRoutes);
 
 // مسارات المستأجرين والجمعيات والمدفوعات
 app.use(`/api/${API_VERSION}/tenants`, tenantRoutes);
