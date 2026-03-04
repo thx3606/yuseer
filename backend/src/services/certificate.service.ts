@@ -6,7 +6,6 @@
  * لدعم متطلبات تطبيق يسر (فخامة ورقي التصميم).
  */
 
-import { TenantStatus } from '@prisma/client';
 import prisma from '../config/database';
 import { logger } from '../utils/logger';
 
@@ -74,19 +73,22 @@ export class CertificateService {
     public static async generatePdfCertificate(
         tenantId: string,
         studentId: string,
-        examId: string
+        _examId: string
     ): Promise<Buffer> {
         try {
             // 1. استدعاء بيانات الطالب والجمعية
             const tenant = await prisma.tenant.findUnique({ where: { id: tenantId } });
-            const student = await prisma.user.findUnique({ where: { id: studentId } });
+            const student = await prisma.user.findUnique({
+                where: { id: studentId },
+                include: { profile: true }
+            });
 
             // هنا نفترض جلب بيانات الاختبار الفعلي لكن سنستخدم بيانات وهمية للتوضيح
             const courseName = "القرآن الكريم - خمسة أجزاء";
             const grade = "ممتاز مرتفع";
             const date = new Date().toLocaleDateString('ar-SA');
             const tenantName = tenant?.name || "جمعية تحفيظ القرآن الكريم";
-            const studentFullName = student?.firstName ? `${student.firstName} ${student.lastName}` : "طالب القرآن";
+            const studentFullName = student?.profile?.firstName ? `${student.profile.firstName} ${student.profile.lastName}` : "طالب القرآن";
 
             // 2. بناء الـ HTML
             const htmlContent = this.getCertificateHtml(studentFullName, courseName, grade, date, tenantName);
