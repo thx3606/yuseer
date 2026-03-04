@@ -2,6 +2,7 @@
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/admissions/page": "app/dashboard/admissions/page.js",
+  "/dashboard/classes/new/page": "app/dashboard/classes/new/page.js",
   "/dashboard/classes/page": "app/dashboard/classes/page.js",
   "/dashboard/evaluation/page": "app/dashboard/evaluation/page.js",
   "/dashboard/exams/page": "app/dashboard/exams/page.js",

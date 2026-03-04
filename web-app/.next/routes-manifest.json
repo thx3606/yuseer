@@ -68,6 +68,12 @@
       "namedRegex": "^/dashboard/classes(?:/)?$"
     },
     {
+      "page": "/dashboard/classes/new",
+      "regex": "^/dashboard/classes/new(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/classes/new(?:/)?$"
+    },
+    {
       "page": "/dashboard/evaluation",
       "regex": "^/dashboard/evaluation(?:/)?$",
       "routeKeys": {},

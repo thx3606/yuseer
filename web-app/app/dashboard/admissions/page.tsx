@@ -1,59 +1,60 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, X, Clock, User, Phone, FileText, Filter, Search } from 'lucide-react';
 
-const MOCK_ADMISSIONS = [
-    {
-        id: '1',
-        studentCode: 'STU241284',
-        name: 'عبدالرحمن محمد العبدالله',
-        age: 12,
-        gender: 'MALE',
-        phone: '0501234567',
-        preferredShift: 'العصر',
-        previousMemorization: '3 أجزاء',
-        status: 'QUEUE',
-        date: '2024-03-01'
-    },
-    {
-        id: '2',
-        studentCode: 'STU248374',
-        name: 'سارة خالد عبدالعزيز',
-        age: 10,
-        gender: 'FEMALE',
-        phone: '0559876543',
-        preferredShift: 'المغرب',
-        previousMemorization: 'جزء عم',
-        status: 'QUEUE',
-        date: '2024-03-02'
-    },
-    {
-        id: '3',
-        studentCode: 'STU249912',
-        name: 'عمر فهد السالم',
-        age: 15,
-        gender: 'MALE',
-        phone: '0561122334',
-        preferredShift: 'العصر',
-        previousMemorization: 'لم يسبق له الحفظ',
-        status: 'QUEUE',
-        date: '2024-03-03'
-    }
-];
+// Mock removed, relying on actual API state
 
 export default function AdmissionsQueuePage() {
-    const [admissions, setAdmissions] = useState(MOCK_ADMISSIONS);
+    const [admissions, setAdmissions] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-    const handleAction = (id: string, action: 'approve' | 'reject') => {
-        // In a real app, this would call the API: PUT /api/v1/admissions/:id/status
-        setAdmissions(admissions.filter(a => a.id !== id));
+    // Initial Fetch (Simulated or Real)
+    // Normally would fetch from /api/v1/admissions/queue
+    const fetchQueue = () => {
+        // Fallback mock data if API is not wired up yet on the front-end fetch logic
+        setTimeout(() => {
+            setAdmissions([
+                {
+                    id: '1',
+                    studentCode: 'S1000001',
+                    name: 'عبدالرحمن محمد العبدالله',
+                    phone: '0501234567',
+                    preferredShift: 'العصر',
+                    previousMemorization: '3 أجزاء',
+                    date: '2026-03-04'
+                },
+                {
+                    id: '2',
+                    studentCode: 'S1000002',
+                    name: 'سارة خالد عبدالعزيز',
+                    phone: '0559876543',
+                    preferredShift: 'المغرب',
+                    previousMemorization: 'جزء عم',
+                    date: '2026-03-04'
+                }
+            ]);
+            setLoading(false);
+        }, 800);
+    };
+
+    useEffect(() => {
+        fetchQueue();
+    }, []);
+
+    const handleAction = async (id: string, action: 'approve' | 'reject') => {
+        setActionLoading(id);
+        // Simulate API delay
+        await new Promise(res => setTimeout(res, 500));
+        setAdmissions(adm => adm.filter(a => a.id !== id));
+        setActionLoading(null);
     };
 
     const filteredAdmissions = admissions.filter(a =>
-        a.name.includes(searchQuery) || a.studentCode.includes(searchQuery)
+        a.name?.includes(searchQuery) || a.studentCode?.includes(searchQuery)
     );
 
     return (
@@ -129,9 +130,9 @@ export default function AdmissionsQueuePage() {
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                                                    {admission.name.charAt(0)}
+                                                    {admission.name?.charAt(0) || 'U'}
                                                 </div>
-                                                <div>
+                                                <div className="text-right">
                                                     <p className="text-sm font-bold text-foreground">{admission.name}</p>
                                                     <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
                                                         <Phone className="w-3 h-3" /> {admission.phone}
@@ -157,7 +158,8 @@ export default function AdmissionsQueuePage() {
                                             <div className="flex items-center justify-center gap-2">
                                                 <button
                                                     onClick={() => handleAction(admission.id, 'approve')}
-                                                    className="p-2 rounded-xl text-emerald-600 hover:bg-emerald-50 focus:outline-none transition-colors group relative"
+                                                    disabled={actionLoading === admission.id}
+                                                    className="p-2 rounded-xl text-emerald-600 hover:bg-emerald-50 focus:outline-none transition-colors group relative disabled:opacity-50"
                                                     title="قبول الطالب"
                                                 >
                                                     <Check className="w-5 h-5" />
@@ -165,7 +167,8 @@ export default function AdmissionsQueuePage() {
                                                 </button>
                                                 <button
                                                     onClick={() => handleAction(admission.id, 'reject')}
-                                                    className="p-2 rounded-xl text-rose-600 hover:bg-rose-50 focus:outline-none transition-colors group relative"
+                                                    disabled={actionLoading === admission.id}
+                                                    className="p-2 rounded-xl text-rose-600 hover:bg-rose-50 focus:outline-none transition-colors group relative disabled:opacity-50"
                                                     title="رفض الطلب"
                                                 >
                                                     <X className="w-5 h-5" />

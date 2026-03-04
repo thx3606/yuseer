@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Search, Filter, Plus, Clock, Users, BookOpen, Star, MoreVertical } from 'lucide-react';
+import Link from 'next/link';
 
 const classesData = [
     { id: 1, name: 'حلقة الإمام نافع', teacher: 'الشيخ عبدالباسط محمد', students: 15, level: 'متقدم (مراجعة)', time: 'العصر', type: 'قرآن كريم' },
@@ -20,10 +21,10 @@ export default function ClassesPage() {
                     <p className="text-muted-foreground font-medium">إدارة الحلقات القرآنية والمتون وتوزيع الطلاب والهيئة</p>
                 </div>
 
-                <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-2xl font-bold transition-all shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.23)] hover:-translate-y-1 flex items-center gap-2">
+                <Link href="/dashboard/classes/new" className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-2xl font-bold transition-all shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.23)] hover:-translate-y-1 flex items-center gap-2">
                     <Plus className="w-5 h-5" />
                     إنشاء حلقة جديدة
-                </button>
+                </Link>
             </div>
 
             {/* Stats Row */}
