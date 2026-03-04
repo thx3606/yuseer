@@ -1,0 +1,743 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  PLATFORM_OWNER
+  TENANT_ADMIN
+  TENANT_STAFF
+  TEACHER
+  EXAMINER
+  STUDENT
+  PARENT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum StudentStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  GRADUATED
+  WITHDRAWN
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum AdmissionStatus {
+  QUEUE
+  ENROLLED
+  REJECTED
+}
+
+enum TenantStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum SubscriptionPlan {
+  FREE
+  MONTHLY
+  YEARLY
+}
+
+model Tenant {
+  id                 String           @id @default(uuid())
+  name               String
+  subdomain          String           @unique
+  status             TenantStatus     @default(PENDING)
+  subscriptionPlan   SubscriptionPlan @default(MONTHLY)
+  subscriptionExpiry DateTime?
+  paymentRef         String?
+  contactEmail       String?
+  contactPhone       String?
+  logo               String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  users                User[]
+  shifts               Shift[]
+  schools              School[]
+  classes              Class[]
+  certificateTemplates CertificateTemplate[]
+  systemSettings       SystemSettings[]
+
+  @@index([subdomain])
+  @@index([status])
+}
+
+model User {
+  id         String    @id @default(uuid())
+  tenantId   String?
+  email      String    @unique
+  nationalId String?
+  password   String
+  role       UserRole
+  isActive   Boolean   @default(true)
+  lastLogin  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  tenant   Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  profile  Profile?
+  teacher  Teacher?
+  student  Student?
+  guardian Guardian?
+  examiner Examiner?
+
+  sentMessages     Message[]      @relation("SentMessages")
+  receivedMessages Message[]      @relation("ReceivedMessages")
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+
+  @@unique([tenantId, nationalId])
+  @@index([email])
+  @@index([role])
+  @@index([tenantId])
+}
+
+model Profile {
+  id             String    @id @default(uuid())
+  userId         String    @unique
+  firstName      String
+  lastName       String
+  firstNameAr    String?
+  lastNameAr     String?
+  phoneNumber    String?
+  whatsappNumber String?
+  dateOfBirth    DateTime?
+  gender         Gender?
+  nationality    String?
+  city           String?
+  address        String?   @db.Text
+  profileImage   String?
+  bio            String?   @db.Text
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model School {
+  id          String     @id @default(uuid())
+  tenantId    String
+  nameAr      String
+  nameEn      String?
+  type        SchoolType @default(QURAN)
+  description String?    @db.Text
+  isOnline    Boolean    @default(false)
+  maxStudents Int?
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  tenant      Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  classes     Class[]
+
+  @@index([tenantId])
+  @@index([type])
+  @@index([isActive])
+}
+
+enum SchoolType {
+  QURAN
+  MUTOON
+  NOORANI_QAIDA
+  COMBINED
+}
+
+model Shift {
+  id        String   @id @default(uuid())
+  tenantId  String
+  name      String
+  startTime String
+  endTime   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  classes   Class[]
+
+  @@index([tenantId])
+}
+
+model Class {
+  id             String         @id @default(uuid())
+  tenantId       String
+  schoolId       String
+  shiftId        String?
+  nameAr         String
+  nameEn         String?
+  level          String?
+  minAge         Int?
+  maxAge         Int?
+  genderRequired Gender?
+  maxStudents    Int            @default(30)
+  schedule       Json?
+  isActive       Boolean        @default(true)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  tenant         Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  school         School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  shift          Shift?         @relation(fields: [shiftId], references: [id], onDelete: SetNull)
+  teachers       TeacherClass[]
+  students       StudentClass[]
+  sessions       Session[]
+  attendances    Attendance[]
+
+  @@index([tenantId])
+  @@index([schoolId])
+  @@index([shiftId])
+  @@index([isActive])
+}
+
+model Teacher {
+  id              String              @id @default(uuid())
+  userId          String              @unique
+  teacherCode     String?             @unique
+  specialization  String?
+  qualifications  Json?
+  ijazahs         Json?
+  experienceYears Int?
+  bio             String?             @db.Text
+  isActive        Boolean             @default(true)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  user            User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classes         TeacherClass[]
+  evaluations     QuranEvaluation[]
+  mutoonEvals     MutoonEvaluation[]
+  nooraniEvals    NooraniEvaluation[]
+  sessions        Session[]
+
+  @@index([userId])
+  @@index([isActive])
+}
+
+model TeacherClass {
+  id        String   @id @default(uuid())
+  teacherId String
+  classId   String
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  teacher   Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([teacherId, classId])
+  @@index([teacherId])
+  @@index([classId])
+}
+
+model Guardian {
+  id           String    @id @default(uuid())
+  userId       String    @unique
+  relationship String?
+  occupation   String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  students     Student[]
+
+  @@index([userId])
+}
+
+model Student {
+  id                   String              @id @default(uuid())
+  userId               String              @unique
+  guardianId           String?
+  studentCode          String              @unique
+  enrollmentDate       DateTime            @default(now())
+  status               StudentStatus       @default(PENDING)
+  admissionStatus      AdmissionStatus     @default(QUEUE)
+  preferredShift       String?
+  previousMemorization String?
+  riwayah              String?
+  medicalInfo          Json?
+  isPaid               Boolean             @default(false)
+  notes                String?             @db.Text
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guardian             Guardian?           @relation(fields: [guardianId], references: [id], onDelete: SetNull)
+  classes              StudentClass[]
+  quranProgress        QuranProgress?
+  quranEvals           QuranEvaluation[]
+  mutoonProgress       MutoonProgress[]
+  mutoonEvals          MutoonEvaluation[]
+  nooraniProgress      NooraniProgress?
+  nooraniEvals         NooraniEvaluation[]
+  attendances          Attendance[]
+  examResults          ExamResult[]
+  certificates         IssuedCertificate[]
+
+  @@index([userId])
+  @@index([guardianId])
+  @@index([studentCode])
+  @@index([status])
+  @@index([admissionStatus])
+}
+
+model StudentClass {
+  id             String   @id @default(uuid())
+  studentId      String
+  classId        String
+  enrollmentDate DateTime @default(now())
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class          Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, classId])
+  @@index([studentId])
+  @@index([classId])
+}
+
+model Session {
+  id          String       @id @default(uuid())
+  classId     String
+  teacherId   String
+  title       String
+  description String?      @db.Text
+  sessionDate DateTime
+  startTime   DateTime
+  endTime     DateTime?
+  sessionType String       @default("regular")
+  onlineLink  String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  class       Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
+  teacher     Teacher      @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  attendances Attendance[]
+
+  @@index([classId])
+  @@index([teacherId])
+  @@index([sessionDate])
+}
+
+model Attendance {
+  id        String           @id @default(uuid())
+  studentId String
+  classId   String
+  sessionId String?
+  date      DateTime         @default(now())
+  status    AttendanceStatus
+  notes     String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class     Class            @relation(fields: [classId], references: [id], onDelete: Cascade)
+  session   Session?         @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([classId])
+  @@index([sessionId])
+  @@index([date])
+}
+
+model QuranProgress {
+  id                   String   @id @default(uuid())
+  studentId            String   @unique
+  currentJuz           Int      @default(1)
+  currentSurah         Int      @default(1)
+  currentPage          Int      @default(1)
+  totalPagesMemorized  Int      @default(0)
+  totalPagesReviewed   Int      @default(0)
+  completionPercentage Float    @default(0)
+  lastMemorizedVerse   String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  student              Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model QuranEvaluation {
+  id             String              @id @default(uuid())
+  studentId      String
+  teacherId      String
+  evaluationType QuranEvaluationType
+  surah          Int?
+  fromAyah       Int?
+  toAyah         Int?
+  fromPage       Int?
+  toPage         Int?
+  juz            Int?
+  tajweedScore   Float?              @default(0)
+  hifzScore      Float?              @default(0)
+  fluencyScore   Float?              @default(0)
+  overallScore   Float?              @default(0)
+  tajweedErrors  Json?
+  memorization   MemorizationLevel?
+  notes          String?             @db.Text
+  audioRecording String?
+  evaluationDate DateTime            @default(now())
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  student        Student             @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  teacher        Teacher             @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([evaluationDate])
+}
+
+enum QuranEvaluationType {
+  HIFZ_NEW
+  MURAJAA
+  TASMIA
+  ITQAN
+  EXAM
+}
+
+enum MemorizationLevel {
+  EXCELLENT
+  VERY_GOOD
+  GOOD
+  ACCEPTABLE
+  WEAK
+  NEEDS_REVIEW
+}
+
+enum MutoonCategory {
+  AQEEDAH
+  FIQH
+  HADITH
+  TAFSEER
+  ARABIC
+  SEERAH
+  AKHLAQ
+  OTHER
+}
+
+model Mutoon {
+  id          String             @id @default(uuid())
+  nameAr      String             @unique
+  nameEn      String?
+  author      String
+  category    MutoonCategory
+  totalLines  Int?
+  description String?            @db.Text
+  level       String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  progress    MutoonProgress[]
+  evaluations MutoonEvaluation[]
+
+  @@index([nameAr])
+  @@index([category])
+}
+
+model MutoonProgress {
+  id             String   @id @default(uuid())
+  studentId      String
+  mutoonId       String
+  currentLine    Int      @default(0)
+  totalMemorized Int      @default(0)
+  percentage     Float    @default(0)
+  isCompleted    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  mutoon         Mutoon   @relation(fields: [mutoonId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, mutoonId])
+  @@index([studentId])
+  @@index([mutoonId])
+}
+
+model MutoonEvaluation {
+  id                 String             @id @default(uuid())
+  studentId          String
+  teacherId          String
+  mutoonId           String
+  fromLine           Int
+  toLine             Int
+  accuracyScore      Float?             @default(0)
+  fluencyScore       Float?             @default(0)
+  understandingScore Float?             @default(0)
+  overallScore       Float?             @default(0)
+  memorization       MemorizationLevel?
+  notes              String?            @db.Text
+  evaluationDate     DateTime           @default(now())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  student            Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  teacher            Teacher            @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  mutoon             Mutoon             @relation(fields: [mutoonId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([mutoonId])
+  @@index([evaluationDate])
+}
+
+model NooraniProgress {
+  id            String   @id @default(uuid())
+  studentId     String   @unique
+  currentLesson Int      @default(1)
+  totalLessons  Int      @default(17)
+  percentage    Float    @default(0)
+  isCompleted   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model NooraniEvaluation {
+  id                 String             @id @default(uuid())
+  studentId          String
+  teacherId          String
+  lessonNumber       Int
+  pronunciationScore Float?             @default(0)
+  recognitionScore   Float?             @default(0)
+  readingScore       Float?             @default(0)
+  overallScore       Float?             @default(0)
+  mastery            MemorizationLevel?
+  notes              String?            @db.Text
+  evaluationDate     DateTime           @default(now())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  student            Student            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  teacher            Teacher            @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([evaluationDate])
+}
+
+model Exam {
+  id                  String               @id @default(uuid())
+  title               String
+  titleAr             String
+  description         String?              @db.Text
+  examType            ExamType
+  subjectType         SubjectType
+  subjectId           String?
+  totalMarks          Float
+  passingMarks        Float
+  duration            Int?
+  startDate           DateTime
+  endDate             DateTime
+  isActive            Boolean              @default(true)
+  createdBy           String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  results             ExamResult[]
+  examinerAssignments ExaminerAssignment[]
+
+  @@index([examType])
+  @@index([subjectType])
+  @@index([startDate])
+}
+
+enum ExamType {
+  ORAL
+  WRITTEN
+  PRACTICAL
+  COMBINED
+}
+
+enum SubjectType {
+  QURAN
+  MUTOON
+  NOORANI_QAIDA
+}
+
+model Examiner {
+  id             String               @id @default(uuid())
+  userId         String               @unique
+  examinerCode   String?              @unique
+  specialization String?
+  isActive       Boolean              @default(true)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignments    ExaminerAssignment[]
+  examResults    ExamResult[]
+
+  @@index([userId])
+  @@index([isActive])
+}
+
+model ExaminerAssignment {
+  id         String   @id @default(uuid())
+  examinerId String
+  examId     String
+  createdAt  DateTime @default(now())
+  examiner   Examiner @relation(fields: [examinerId], references: [id], onDelete: Cascade)
+  exam       Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examinerId, examId])
+  @@index([examinerId])
+  @@index([examId])
+}
+
+model ExamResult {
+  id             String    @id @default(uuid())
+  studentId      String
+  examId         String
+  examinerId     String?
+  marksObtained  Float
+  percentage     Float
+  grade          String?
+  isPassed       Boolean
+  evaluation     Json?
+  notes          String?   @db.Text
+  audioRecording String?
+  examDate       DateTime  @default(now())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  student        Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  exam           Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  examiner       Examiner? @relation(fields: [examinerId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([examId])
+  @@index([examinerId])
+  @@index([examDate])
+}
+
+model CertificateTemplate {
+  id        String              @id @default(uuid())
+  tenantId  String
+  nameAr    String
+  nameEn    String?
+  type      CertificateType
+  template  String              @db.Text
+  design    Json?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  tenant    Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  issued    IssuedCertificate[]
+
+  @@index([tenantId])
+  @@index([type])
+}
+
+enum CertificateType {
+  QURAN_COMPLETION
+  QURAN_PARTIAL
+  MUTOON_COMPLETION
+  NOORANI_COMPLETION
+  IJAZAH
+  ATTENDANCE
+  EXCELLENCE
+}
+
+model IssuedCertificate {
+  id                String              @id @default(uuid())
+  studentId         String
+  templateId        String
+  certificateNumber String              @unique
+  title             String
+  description       String?             @db.Text
+  details           Json?
+  issueDate         DateTime            @default(now())
+  pdfUrl            String?
+  qrCode            String?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  student           Student             @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  template          CertificateTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([templateId])
+  @@index([certificateNumber])
+  @@index([issueDate])
+}
+
+model Message {
+  id          String    @id @default(uuid())
+  senderId    String
+  receiverId  String
+  subject     String?
+  content     String    @db.Text
+  isRead      Boolean   @default(false)
+  readAt      DateTime?
+  attachments Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  sender      User      @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver    User      @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String           @db.Text
+  data      Json?
+  isRead    Boolean          @default(false)
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+enum NotificationType {
+  GENERAL
+  EXAM
+  EVALUATION
+  MESSAGE
+  ATTENDANCE
+  CERTIFICATE
+  ADMISSION
+  SYSTEM
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  oldValue  Json?
+  newValue  Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+}
+
+model SystemSettings {
+  id          String   @id @default(uuid())
+  tenantId    String?
+  key         String
+  value       Json
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, key])
+  @@index([key])
+  @@index([tenantId])
+}

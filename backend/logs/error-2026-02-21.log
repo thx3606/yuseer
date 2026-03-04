@@ -1,0 +1,189 @@
+2026-02-21 09:19:05 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:217:21)
+2026-02-21 09:23:35 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:217:21)
+2026-02-21 09:25:44 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:221:21)
+2026-02-21 09:30:42 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:221:21)
+2026-02-21 09:32:05 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:221:21)
+2026-02-21 09:36:00 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:221:21)
+2026-02-21 09:53:22 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 09:53:32 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 09:53:42 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 09:54:13 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 09:55:24 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 10:48:33 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:23:50 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:24:57 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:27:09 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:27:45 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:28:01 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:31:23 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:32:23 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:32:42 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:34:05 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:36:49 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (C:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (C:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (C:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:38:58 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:39:21 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:39:39 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:54:42 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)
+2026-02-21 11:55:33 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:224:21)

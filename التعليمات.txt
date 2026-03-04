@@ -1,0 +1,95 @@
+
+> vite
+
+[2m١٠:٥٧:٣٥ ص[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+Port 5173 is in use, trying another one...
+
+  [32m[1mVITE[22m v7.3.1[39m  [2mready in [0m[1m369[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m١١:١٦:١٥ ص[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/LoginPage.tsx[22m
+[2m١١:١٧:٥٠ ص[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.css[22m
+[2m١١:١٨:٥٣ ص[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/AdminDashboard.tsx[22m
+</stdout>
+
+<timestamp>2026-02-21T08:21:39.497Z</timestamp>
+🎉 أخبار سارة! الخوادم تعمل بالفعل! ✅
+✅ الوضع الحالي:
+الخوادم تعمل الآن بنجاح! لا حاجة لتشغيل أي شيء!
+1️⃣ Backend (الخادم الخلفي) ✅
+🚀 Server running on port 5000
+📍 URL: http://localhost:5000
+✅ Database connected successfully
+✅ Email service initialized
+2️⃣ Frontend (الواجهة) ✅
+🚀 VITE v7.3.1 ready
+➜ Local: http://localhost:5174/
+🚀 كيفية فتح التطبيق الآن:
+الطريقة الأسهل - انسخ والصق:
+افتح المتصفح واذهب إلى:
+http://localhost:5174
+أو انقر هنا مباشرة:
+افتح التطبيق: http://localhost:5174
+🔐 تسجيل الدخول:
+استخدم أحد الحسابات التالية:
+👑 المدير:
+البريد: admin@albirr.com
+كلمة المرور: 123456
+👨‍🏫 المعلم:
+البريد: teacher@albirr.com
+كلمة المرور: 123456
+👨‍🎓 الطالب:
+البريد: student@albirr.com
+كلمة المرور: 123456
+💡 إذا أغلقت النوافذ وتريد تشغيل الخوادم مرة أخرى:
+افتح نافذتين PowerShell منفصلتين:
+النافذة الأولى - Backend:
+cd c:\Users\Mazen\Desktop\yuoser\backend
+npm run dev
+النافذة الثانية - Frontend:
+cd c:\Users\Mazen\Desktop\yuoser\frontend
+npm run dev
+📋 الأوامر المفيدة:
+لإيقاف الخوادم:
+اضغط Ctrl + C في كل نافذة PowerShell
+لإعادة تشغيل Backend:
+cd c:\Users\Mazen\Desktop\yuoser\backend
+npm run dev
+لإعادة تشغيل Frontend:
+cd c:\Users\Mazen\Desktop\yuoser\frontend
+npm run dev
+لإعادة تشغيل كل شيء من البداية:
+# في نافذة واحدة - Backend
+cd c:\Users\Mazen\Desktop\yuoser\backend
+npm install
+npm run dev
+
+# في نافذة أخرى - Frontend
+cd c:\Users\Mazen\Desktop\yuoser\frontend
+npm install
+npm run dev
+🎯 ملخص سريع:
+الخدمة	الحالة	الرابط
+Backend	✅ يعمل	http://localhost:5000
+Frontend	✅ يعمل	http://localhost:5174
+قاعدة البيانات	✅ متصلة	PostgreSQL
+🚨 إذا واجهت أي مشكلة:
+المشكلة: Backend لا يعمل
+cd c:\Users\Mazen\Desktop\yuoser\backend
+npm install
+npx prisma generate
+npm run dev
+المشكلة: Frontend لا يعمل
+cd c:\Users\Mazen\Desktop\yuoser\frontend
+npm install
+npm run dev
+المشكلة: خطأ في قاعدة البيانات
+cd c:\Users\Mazen\Desktop\yuoser\backend
+npx prisma migrate reset
+npx prisma migrate dev
+🎊 الآن افتح التطبيق واستمتع!
+الرابط المباشر: http://localhost:5174 تم تسجيل دخول ناجح للمدير قبل قليل! كما تظهر السجلات:
+✅ تسجيل دخول: admin@albirr.com - SUPER_ADMIN
+POST /api/v1/auth/login 200
+التطبيق جاهز 100% للاستخدام! 🎉

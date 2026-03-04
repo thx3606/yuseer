@@ -1,0 +1,6 @@
+[00:00:01.449] Server  LOG     ✓ Ready in 1164ms
+[00:00:41.364] Server  LOG     ○ Compiling / ...
+[00:03:04.417] Server  LOG     ✓ Finished writing to filesystem cache in 59s
+[00:03:24.999] Server  LOG     ✓ Finished filesystem cache database compaction in 20.7s
+[00:04:08.437] Server  LOG     ✓ Finished writing to filesystem cache in 53s
+[00:04:24.080] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

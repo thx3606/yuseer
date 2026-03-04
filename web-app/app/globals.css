@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+    --color-background: #F8FAFC;
+    --color-foreground: #0f172a;
+    --color-card: #ffffff;
+    --color-card-foreground: #0f172a;
+    --color-popover: #ffffff;
+    --color-popover-foreground: #0f172a;
+
+    --color-primary: #059669;
+    /* Emerald 600 - Islamic Green */
+    --color-primary-foreground: #ffffff;
+
+    --color-secondary: #D4AF37;
+    /* Islamic Gold */
+    --color-secondary-foreground: #0f172a;
+
+    --color-muted: #f1f5f9;
+    --color-muted-foreground: #64748b;
+
+    --color-accent: #f1f5f9;
+    --color-accent-foreground: #0f172a;
+
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+
+    --color-border: #e2e8f0;
+    --color-input: #e2e8f0;
+    --color-ring: #059669;
+
+    --font-sans: var(--font-tajawal), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+
+    *,
+    ::before,
+    ::after {
+        border-color: var(--color-border);
+    }
+}

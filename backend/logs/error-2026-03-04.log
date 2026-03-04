@@ -1,0 +1,15 @@
+2026-03-04 17:22:30 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:232:21)
+2026-03-04 17:24:16 [ERROR]: ❌ WhatsApp service initialization failed: accountSid must start with AC
+Error: accountSid must start with AC
+    at new Client (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\base\BaseTwilio.js:71:23)
+    at new Twilio (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\rest\Twilio.js:33:9)
+    at TwilioSDK (c:\Users\Mazen\Desktop\yuoser\node_modules\twilio\lib\index.js:40:12)
+    at WhatsAppService.initialize (c:\Users\Mazen\Desktop\yuoser\backend\src\services\whatsapp.service.ts:24:27)
+    at startServer (c:\Users\Mazen\Desktop\yuoser\backend\src\server.ts:232:21)
+Wed Mar 04 2026 17:28:06 GMT+0300 (غرينتش+٠٣:٠٠) [ERROR]: Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) } {"target":"quaint::connector::postgres::native"}

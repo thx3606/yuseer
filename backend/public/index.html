@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة مدارس تحفيظ القرآن الكريم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .login-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .accounts-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .accounts-list h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .account-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .account-item:hover {
+            border-color: #667eea;
+            transform: translateX(-5px);
+        }
+
+        .account-info {
+            flex: 1;
+        }
+
+        .account-role {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .account-email {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .quick-login-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .quick-login-btn:hover {
+            background: #764ba2;
+        }
+
+        .response-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .response-box.success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .response-box.error {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+
+        .response-box h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .response-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .user-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .user-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .token-box {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            word-wrap: break-word;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕌 نظام إدارة مدارس تحفيظ القرآن الكريم</h1>
+        <p class="subtitle">جمعية البر الخيرية</p>
+
+        <!-- قائمة الحسابات الجاهزة -->
+        <div class="accounts-list">
+            <h3>🔐 الحسابات الجاهزة - اضغط للتجربة</h3>
+
+            <div class="account-item" onclick="quickLogin('admin@albirr.com')">
+                <div class="account-info">
+                    <div class="account-role">👑 المسؤول الرئيسي</div>
+                    <div class="account-email">admin@albirr.com</div>
+                </div>
+                <button class="quick-login-btn" type="button">دخول سريع</button>
+            </div>
+
+            <div class="account-item" onclick="quickLogin('manager@albirr.com')">
+                <div class="account-info">
+                    <div class="account-role">👤 مدير الجمعية</div>
+                    <div class="account-email">manager@albirr.com</div>
+                </div>
+                <button class="quick-login-btn" type="button">دخول سريع</button>
+            </div>
+
+            <div class="account-item" onclick="quickLogin('ahmed@albirr.com')">
+                <div class="account-info">
+                    <div class="account-role">👨‍🏫 المعلم</div>
+                    <div class="account-email">ahmed@albirr.com</div>
+                </div>
+                <button class="quick-login-btn" type="button">دخول سريع</button>
+            </div>
+
+            <div class="account-item" onclick="quickLogin('guardian1@test.com')">
+                <div class="account-info">
+                    <div class="account-role">👨‍👦 ولي الأمر</div>
+                    <div class="account-email">guardian1@test.com</div>
+                </div>
+                <button class="quick-login-btn" type="button">دخول سريع</button>
+            </div>
+
+            <div class="account-item" onclick="quickLogin('student1@test.com')">
+                <div class="account-info">
+                    <div class="account-role">👨‍🎓 الطالب</div>
+                    <div class="account-email">student1@test.com</div>
+                </div>
+                <button class="quick-login-btn" type="button">دخول سريع</button>
+            </div>
+        </div>
+
+        <!-- نموذج تسجيل الدخول -->
+        <div class="login-box">
+            <h2>أو سجل دخول يدوياً</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">📧 البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="مثال: admin@albirr.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">🔒 كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="123456">
+                </div>
+                <button type="submit">🚀 تسجيل الدخول</button>
+            </form>
+        </div>
+
+        <!-- معلومات المستخدم -->
+        <div id="userInfo" class="user-info" style="display: none;">
+            <h3>✅ تم تسجيل الدخول بنجاح!</h3>
+            <div id="userDetails"></div>
+            <div class="token-box">
+                <strong>Token:</strong>
+                <div id="tokenDisplay"></div>
+            </div>
+        </div>
+
+        <!-- صندوق الاستجابة -->
+        <div id="responseBox" class="response-box">
+            <h3 id="responseTitle">الاستجابة</h3>
+            <div id="responseContent" class="response-content"></div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div id="statsSection" style="display: none;">
+            <h3 style="margin: 20px 0; color: #333;">📊 إحصائيات النظام</h3>
+            <div id="statsGrid" class="stats-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        let authToken = null;
+
+        // تسجيل دخول سريع
+        async function quickLogin(email) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = '123456';
+            await handleLogin(email, '123456');
+        }
+
+        // معالج نموذج تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            await handleLogin(email, password);
+        });
+
+        // دالة تسجيل الدخول
+        async function handleLogin(email, password) {
+            showLoading();
+
+            try {
+                const response = await fetch('/api/v1/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    authToken = data.data.token;
+                    showSuccess(data);
+                    displayUserInfo(data.data.user);
+                    await loadStats();
+                } else {
+                    showError(data);
+                }
+            } catch (error) {
+                showError({
+                    message: 'خطأ في الاتصال بالخادم',
+                    messageEn: 'Server connection error',
+                    error: error.message
+                });
+            }
+        }
+
+        // عرض معلومات المستخدم
+        function displayUserInfo(user) {
+            const userInfo = document.getElementById('userInfo');
+            const userDetails = document.getElementById('userDetails');
+            const tokenDisplay = document.getElementById('tokenDisplay');
+
+            let roleAr = {
+                'SUPER_ADMIN': 'مسؤول رئيسي',
+                'ORGANIZATION_ADMIN': 'مدير جمعية',
+                'TEACHER': 'معلم',
+                'GUARDIAN': 'ولي أمر',
+                'STUDENT': 'طالب'
+            };
+
+            userDetails.innerHTML = `
+                <p><strong>الاسم:</strong> ${user.profile?.firstName || ''} ${user.profile?.lastName || ''}</p>
+                <p><strong>البريد:</strong> ${user.email}</p>
+                <p><strong>الدور:</strong> ${roleAr[user.role] || user.role}</p>
+            `;
+
+            tokenDisplay.textContent = authToken.substring(0, 50) + '...';
+            userInfo.style.display = 'block';
+        }
+
+        // تحميل الإحصائيات
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/v1/demo/stats');
+                const data = await response.json();
+
+                if (data.success) {
+                    const statsSection = document.getElementById('statsSection');
+                    const statsGrid = document.getElementById('statsGrid');
+
+                    const stats = data.data.stats;
+                    statsGrid.innerHTML = `
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalUsers}</div>
+                            <div class="stat-label">المستخدمين</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalStudents}</div>
+                            <div class="stat-label">الطلاب</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalTeachers}</div>
+                            <div class="stat-label">المعلمين</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${stats.totalClasses}</div>
+                            <div class="stat-label">الحلقات</div>
+                        </div>
+                    `;
+
+                    statsSection.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        // عرض التحميل
+        function showLoading() {
+            const responseBox = document.getElementById('responseBox');
+            const responseContent = document.getElementById('responseContent');
+            responseBox.className = 'response-box';
+            responseBox.style.display = 'block';
+            responseContent.innerHTML = '<div class="loading"><div class="spinner"></div><p>جاري التحميل...</p></div>';
+        }
+
+        // عرض النجاح
+        function showSuccess(data) {
+            const responseBox = document.getElementById('responseBox');
+            const responseTitle = document.getElementById('responseTitle');
+            const responseContent = document.getElementById('responseContent');
+
+            responseBox.className = 'response-box success';
+            responseBox.style.display = 'block';
+            responseTitle.textContent = '✅ نجح!';
+            responseContent.textContent = JSON.stringify(data, null, 2);
+        }
+
+        // عرض الخطأ
+        function showError(data) {
+            const responseBox = document.getElementById('responseBox');
+            const responseTitle = document.getElementById('responseTitle');
+            const responseContent = document.getElementById('responseContent');
+
+            responseBox.className = 'response-box error';
+            responseBox.style.display = 'block';
+            responseTitle.textContent = '❌ خطأ!';
+            responseContent.textContent = JSON.stringify(data, null, 2);
+        }
+
+        // تحميل الإحصائيات عند فتح الصفحة
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch('/api/v1/demo/stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ النظام يعمل!', data);
+                }
+            } catch (error) {
+                console.error('⚠️ تأكد من تشغيل الخادم:', error);
+            }
+        });
+    </script>
+</body>
+</html>
